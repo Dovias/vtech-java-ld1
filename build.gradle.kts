@@ -26,6 +26,23 @@ repositories {
     mavenCentral()
 }
 
+tasks {
+    processResources {
+        val currentSourceSet = sourceSets.find { sourceSet ->
+            sourceSet.resources.any {
+                source.contains(it)
+            }
+        }
+
+        val properties = "classDirectory" to currentSourceSet!!.output.classesDirs.singleFile.relativeTo(projectDir)
+        filesMatching("META-INF/persistence.xml") {
+            expand(properties)
+        }
+    }
+}
+
+
 dependencies {
     implementation("org.xerial:sqlite-jdbc:3.47.1.0")
+    implementation("org.hibernate.orm:hibernate-community-dialects:6.6.3.Final")
 }
