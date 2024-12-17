@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("application")
     id("org.openjfx.javafxplugin") version "0.1.0"
+    id("org.hibernate.orm") version "6.6.3.Final"
 }
 
 group = "me.dovias.vtech"
