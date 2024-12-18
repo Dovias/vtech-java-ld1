@@ -6,20 +6,19 @@ import jakarta.persistence.Persistence;
 import javafx.application.Application;
 
 public class EntryPoint {
-    private static ApplicationState state;
+    private static ApplicationContainer container;
 
     public static void main(String[] args) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("application");
         EntityManager manager = factory.createEntityManager();
 
-        state = new ApplicationState(manager);
+        EntryPoint.container = new ApplicationContainer(manager);
 
         Application.launch(FXApplication.class);
         factory.close();
-
     }
 
-    public static ApplicationState getApplicationState() {
-        return EntryPoint.state;
+    public static ApplicationContainer getContainer() {
+        return EntryPoint.container;
     }
 }
